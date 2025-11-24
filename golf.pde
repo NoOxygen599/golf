@@ -21,6 +21,10 @@ FCircle gBall;
 
 //variables
 boolean set;
+
+float vx;
+float vy;
+
 void setup() {
   //make window
   size(1000, 700);
@@ -28,6 +32,8 @@ void setup() {
   //load resources
 set = false;
  
+ vx = 0;
+ vy = 0;
  
   //initialise world
   makeWorld();
@@ -41,7 +47,7 @@ set = false;
 
 void makeWorld() {
   Fisica.init(this);
-  world = new FWorld();
+  world = new FWorld(-100000, -1000000, 1000000, 1000000);
   world.setGravity(0, 981);
 }
 
@@ -82,7 +88,7 @@ void makeTopPlatform() {
   topPlatform.setStatic(true);
   topPlatform.setFillColor(golf);
   topPlatform.setFriction(0.1);
-
+  topPlatform.setGrabbable(false);
   //put it in the world
   world.add(topPlatform);
 }
@@ -125,10 +131,10 @@ void draw() {
 
   if (frameCount % 50 == 0) {  //Every 20 frames ...
    // makeCircle();
-   makeBlob();
+   //makeBlob();
    // makeBox();
-  if (gBall.getX() < 0     || gBall.getY() < 0) { gBall.setPosition(90, 250); }
-  if (gBall.getX() > width || gBall.getY() > height) { gBall.setPosition(90, 250); }
+  if (gBall.getX() < 0     || gBall.getY() < 0) { gBall.setPosition(90, 250); }   //adjustVelocity(vx, vy);}
+  if (gBall.getX() > width || gBall.getY() > height) { gBall.setPosition(90, 250);}   // adjustVelocity(vx, vy);}
  }
   world.step();  //get box2D to calculate all the forces and new positions
   world.draw();  //ask box2D to convert this world to processing screen coordinates and draw
