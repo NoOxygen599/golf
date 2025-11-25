@@ -61,8 +61,8 @@ void makeTopPlatform() {
   topPlatform.vertex(20, 180);
   topPlatform.vertex(60, 240);
   topPlatform.vertex(90, 270);
-  topPlatform.vertex(100, 270);
-  topPlatform.vertex(105, 265);
+  topPlatform.vertex(105, 270);
+  topPlatform.vertex(110, 260);
   topPlatform.vertex(120, 300);
   topPlatform.vertex(160, 350);
   topPlatform.vertex(170, 550);
@@ -133,9 +133,9 @@ void draw() {
    // makeCircle();
    //makeBlob();
    // makeBox();
-  if (gBall.getX() < 0     || gBall.getY() < 0) { gBall.setPosition(90, 250); }   //adjustVelocity(vx, vy);}
-  if (gBall.getX() > width || gBall.getY() > height) { gBall.setPosition(90, 250);}   // adjustVelocity(vx, vy);}
- }
+  if (gBall.getX() < 0) {      gBall.setPosition(98, 250);   gBall.setVelocity(0, 0);} //world.remove(gBall);  makeGball();}   
+  if (gBall.getX() > width || gBall.getY() > height)  {   gBall.setPosition(98, 250);   gBall.setVelocity(0, 0);} //world.remove(gBall);  makeGball();} 
+ }  //|| gBall.getY() < 0)
   world.step();  //get box2D to calculate all the forces and new positions
   world.draw();  //ask box2D to convert this world to processing screen coordinates and draw
 }
@@ -204,7 +204,7 @@ void makeBox() {
 
 void makeGball() {
   gBall = new FCircle(20);
-  gBall.setPosition(90, 250);
+  gBall.setPosition(100, 240);
 
   //set visuals
   
