@@ -9,8 +9,6 @@ color yellow = color(242, 215, 16);
 color golf   = #84CB97;
 
 //assets
-PImage redBird;
-PImage slime;
 
 FPoly topPlatform; 
 FPoly bottomPlatform;
@@ -126,18 +124,34 @@ void makeBottomPlatform() {
 //===========================================================================================
 
 void draw() {
-  println("x: " + mouseX + " y: " + mouseY);
+  //println("x: " + mouseX + " y: " + mouseY);
   background(blue);
-
-  if (frameCount % 50 == 0) {  //Every 20 frames ...
+  
+//  if (frameCount % 50 == 0) {  //Every 20 frames ...
    // makeCircle();
    //makeBlob();
    // makeBox();
   if (gBall.getX() < 0) {      gBall.setPosition(98, 250);   gBall.setVelocity(0, 0);} //world.remove(gBall);  makeGball();}   
   if (gBall.getX() > width || gBall.getY() > height)  {   gBall.setPosition(98, 250);   gBall.setVelocity(0, 0);} //world.remove(gBall);  makeGball();} 
- }  //|| gBall.getY() < 0)
+ //}  //|| gBall.getY() < 0)
   world.step();  //get box2D to calculate all the forces and new positions
   world.draw();  //ask box2D to convert this world to processing screen coordinates and draw
+
+  if (mouseDragOn) {
+    float maxDist = 220;
+    float dist = dist(mouseX, mouseY, gBall.getX(), gBall.getY());
+    println(dist);
+    if (dist >= maxDist) dist = maxDist;
+    
+    PVector v = new PVector(mouseX - gBall.getX(), mouseY - gBall.getY());
+    v.setMag(dist);
+    
+    pushMatrix();
+    strokeWeight((maxDist - dist)*0.016 + 2.5);
+    line(gBall.getX() + v.x, gBall.getY() + v.y, gBall.getX(), gBall.getY());
+    popMatrix();
+  }
+
 }
 
 
@@ -214,6 +228,7 @@ void makeGball() {
   gBall.setFriction(1);
   gBall.setStatic(set); 
   gBall.setRestitution(0.5);
+  gBall.setGrabbable(false);
   world.add(gBall);
 
 }
