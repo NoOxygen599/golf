@@ -8,10 +8,6 @@ void mousePressed() {
   // if click is inside ball
   if (gBall.isSleeping() && dist(mouseX, mouseY, gBall.getX(), gBall.getY()) <= bRadius) {
     mouseDragOn = true;
-    pushMatrix();
-    strokeWeight(3);
-    line(mouseX, mouseY, gBall.getX(), gBall.getY());
-    popMatrix();
   
   }
      

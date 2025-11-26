@@ -60,11 +60,18 @@ void makeTopPlatform() {
   topPlatform.vertex(60, 240);
   topPlatform.vertex(90, 270);
   topPlatform.vertex(105, 270);
-  topPlatform.vertex(110, 260);
+  topPlatform.vertex(110, 265);
   topPlatform.vertex(120, 300);
   topPlatform.vertex(160, 350);
   topPlatform.vertex(170, 550);
   topPlatform.vertex(270, 630);
+  topPlatform.vertex(310, 620);
+  topPlatform.vertex(340, 470);
+  topPlatform.vertex(315, 380);
+  topPlatform.vertex(345, 370);
+  topPlatform.vertex(370, 375);
+  topPlatform.vertex(365, 540);
+  topPlatform.vertex(380, 670);
   topPlatform.vertex(460, 680);
   topPlatform.vertex(570, 630);
   topPlatform.vertex(600, 600);
@@ -127,15 +134,14 @@ void draw() {
   //println("x: " + mouseX + " y: " + mouseY);
   background(blue);
   
-//  if (frameCount % 50 == 0) {  //Every 20 frames ...
+
    // makeCircle();
    //makeBlob();
    // makeBox();
-  if (gBall.getX() < 0) {      gBall.setPosition(98, 250);   gBall.setVelocity(0, 0);} //world.remove(gBall);  makeGball();}   
-  if (gBall.getX() > width || gBall.getY() > height)  {   gBall.setPosition(98, 250);   gBall.setVelocity(0, 0);} //world.remove(gBall);  makeGball();} 
- //}  //|| gBall.getY() < 0)
-  world.step();  //get box2D to calculate all the forces and new positions
-  world.draw();  //ask box2D to convert this world to processing screen coordinates and draw
+  if (gBall.getX() < 0)                               {  gBall.setVelocity(0, 0);  gBall.setPosition(98, 250);}
+  if (gBall.getX() > width || gBall.getY() > height)  {  gBall.setVelocity(0, 0);  gBall.setPosition(98, 250);} 
+  world.step();                                                                                                                         //get box2D to calculate all the forces and new positions
+  world.draw();                                                                                                                           //ask box2D to convert this world to processing screen coordinates and draw
 
   if (mouseDragOn) {
     float maxDist = 220;
@@ -218,7 +224,7 @@ void makeBox() {
 
 void makeGball() {
   gBall = new FCircle(20);
-  gBall.setPosition(100, 240);
+  gBall.setPosition(98, 240);
 
   //set visuals
   
@@ -229,6 +235,7 @@ void makeGball() {
   gBall.setStatic(set); 
   gBall.setRestitution(0.5);
   gBall.setGrabbable(false);
+  gBall.setVelocity(0, 0);
   world.add(gBall);
 
 }
