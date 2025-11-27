@@ -7,6 +7,8 @@ color green  = color(74, 163, 57);
 color red    = color(224, 80, 61);
 color yellow = color(242, 215, 16);
 color golf   = #84CB97;
+color grey   = #EAE3E3;
+color white  = #FFFCFC;
 
 //assets
 
@@ -78,10 +80,10 @@ void makeTopPlatform() {
   topPlatform.vertex(620, 500);
   topPlatform.vertex(670, 510);
   topPlatform.vertex(750, 510);
-  topPlatform.vertex(800, 530);
+  topPlatform.vertex(798, 530);
   topPlatform.vertex(800, 560);
   topPlatform.vertex(830, 560);
-  topPlatform.vertex(830, 530);
+  topPlatform.vertex(832, 530);
   topPlatform.vertex(880, 510);
   topPlatform.vertex(940, 500);
   topPlatform.vertex(1000, 530);
@@ -157,7 +159,20 @@ void draw() {
     line(gBall.getX() + v.x, gBall.getY() + v.y, gBall.getX(), gBall.getY());
     popMatrix();
   }
-
+  
+   if( gBall.getVelocityX() == 0 || gBall.getVelocityY() == 0) {
+    gBall.setFillColor(white);
+  } else {
+    gBall.setFillColor(grey); 
+  }
+  
+  pushMatrix(); 
+  fill(0); 
+  strokeWeight(1); 
+  rect(815, 450, 2, 110);
+  fill(red); 
+  triangle(810, 450, 785, 465, 810, 480); 
+  popMatrix(); 
 }
 
 
@@ -227,13 +242,13 @@ void makeGball() {
   gBall.setPosition(98, 240);
 
   //set visuals
-  
+ 
   
   //set physical properties
   gBall.setDensity(0.8);
   gBall.setFriction(1);
   gBall.setStatic(set); 
-  gBall.setRestitution(0.5);
+  gBall.setRestitution(0.5 );
   gBall.setGrabbable(false);
   gBall.setVelocity(0, 0);
   world.add(gBall);
