@@ -6,7 +6,7 @@ void mousePressed() {
   float bRadius = gBall.getSize()/2;
   
   // if click is inside ball
-  if (gBall.isSleeping() && dist(mouseX, mouseY, gBall.getX(), gBall.getY()) <= bRadius) {
+  if (Math.abs(gBall.getVelocityX())<2.3 && Math.abs(gBall.getVelocityY())<2.3 && dist(mouseX, mouseY, gBall.getX(), gBall.getY()) <= bRadius) {
     mouseDragOn = true;
   
   }

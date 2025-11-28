@@ -15,6 +15,15 @@ color white  = #FFFCFC;
 FPoly topPlatform; 
 FPoly bottomPlatform;
 
+
+//mode variables
+int mode;
+final int INTRO = 0;
+final int GAME = 1;
+final int GAMEOVER = 2;
+
+
+
 //fisica
 FWorld world;
 FCircle gBall;
@@ -41,6 +50,8 @@ set = false;
   //add terrain to world
   makeTopPlatform();
   makeBottomPlatform();
+  
+  mode = GAME;
 }
 
 //===========================================================================================
@@ -60,33 +71,41 @@ void makeTopPlatform() {
   topPlatform.vertex(0, 120);
   topPlatform.vertex(20, 180);
   topPlatform.vertex(60, 240);
+  //starting
   topPlatform.vertex(90, 270);
   topPlatform.vertex(105, 270);
   topPlatform.vertex(110, 265);
+  //first pit
   topPlatform.vertex(120, 300);
   topPlatform.vertex(160, 350);
   topPlatform.vertex(170, 550);
   topPlatform.vertex(270, 630);
   topPlatform.vertex(310, 620);
+  //pillar
   topPlatform.vertex(340, 470);
-  topPlatform.vertex(315, 380);
-  topPlatform.vertex(345, 370);
-  topPlatform.vertex(370, 375);
+  topPlatform.vertex(315, 280);
+  topPlatform.vertex(345, 270);
+  topPlatform.vertex(370, 275);
   topPlatform.vertex(365, 540);
+  //second pit
   topPlatform.vertex(380, 670);
   topPlatform.vertex(460, 680);
   topPlatform.vertex(570, 630);
   topPlatform.vertex(600, 600);
   topPlatform.vertex(620, 500);
+  //final flat
   topPlatform.vertex(670, 510);
   topPlatform.vertex(750, 510);
+  //hole
   topPlatform.vertex(798, 530);
   topPlatform.vertex(800, 560);
   topPlatform.vertex(830, 560);
   topPlatform.vertex(832, 530);
+  //past end
   topPlatform.vertex(880, 510);
   topPlatform.vertex(940, 500);
   topPlatform.vertex(1000, 530);
+  //bottom
   topPlatform.vertex(width, height);
   topPlatform.vertex(width/2, height);
   topPlatform.vertex(0, height);
@@ -140,31 +159,7 @@ void draw() {
    // makeCircle();
    //makeBlob();
    // makeBox();
-  if (gBall.getX() < 0)                               {  gBall.setVelocity(0, 0);  gBall.setPosition(98, 250);}
-  if (gBall.getX() > width || gBall.getY() > height)  {  gBall.setVelocity(0, 0);  gBall.setPosition(98, 250);} 
-  world.step();                                                                                                                         //get box2D to calculate all the forces and new positions
-  world.draw();                                                                                                                           //ask box2D to convert this world to processing screen coordinates and draw
-
-  if (mouseDragOn) {
-    float maxDist = 220;
-    float dist = dist(mouseX, mouseY, gBall.getX(), gBall.getY());
-    println(dist);
-    if (dist >= maxDist) dist = maxDist;
-    
-    PVector v = new PVector(mouseX - gBall.getX(), mouseY - gBall.getY());
-    v.setMag(dist);
-    
-    pushMatrix();
-    strokeWeight((maxDist - dist)*0.016 + 2.5);
-    line(gBall.getX() + v.x, gBall.getY() + v.y, gBall.getX(), gBall.getY());
-    popMatrix();
-  }
   
-   if( gBall.getVelocityX() == 0 || gBall.getVelocityY() == 0) {
-    gBall.setFillColor(white);
-  } else {
-    gBall.setFillColor(grey); 
-  }
   
   pushMatrix(); 
   fill(0); 
@@ -173,6 +168,18 @@ void draw() {
   fill(red); 
   triangle(810, 450, 785, 465, 810, 480); 
   popMatrix(); 
+  
+  
+   if (mode == INTRO) {
+    intro();
+  } else if (mode == GAME) {
+    game();
+    drawing();
+  } else if (mode == GAMEOVER) {
+    gameover();
+  }  
+  
+  
 }
 
 
