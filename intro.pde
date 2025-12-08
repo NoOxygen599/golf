@@ -20,7 +20,17 @@ void intro() {
   stroke(0);
 //  textFont( loadFont("FelixTitlingMT-48.vlw") ); 
   textSize(200); 
-  text("GOLF", width/3, height/3);
+  text("GOLF", width/2, height/3);
   popMatrix(); 
   
+  
+  pushMatrix();
+  fill(white); 
+  textSize(50); 
+  rect(width/2 - 150, height/2 - 40, 300, 80);
+  fill(0); 
+  text("Start", width/2 - 50, height/2 + 10);
+  
+  
+  popMatrix();
 }

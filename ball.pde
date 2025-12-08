@@ -26,7 +26,24 @@ void mouseReleased()  {
     mouseDragOn = false;
   }
   
-}
+  
+  //  INTERACTIONS ===============================================
+  
+  
+   if (mouseX > width/2 - 150 && mouseX < width/2 + 150 && mouseY > height/2 - 40 && mouseY < height/2 + 40) {
+    if (mode == INTRO){
+      mode = GAME;
+      //println("set mode to GAME");
+      
+    }
+   }
+    else if (mouseX > width/2 - 50 && mouseX < width/2 + 250 && mouseY > height/2 - 100 && mouseY < height/2 + 200) {
+      if (mode == GAMEOVER){
+      mode = INTRO;
+    }
+  }
+ }
+
 
 void mouseDragged() {
   
