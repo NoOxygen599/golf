@@ -158,7 +158,6 @@ void makeGball() {
 
   //set visuals
  
-  
   //set physical properties
   gBall.setDensity(0.8);
   gBall.setFriction(1);

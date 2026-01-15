@@ -68,9 +68,6 @@ void draw() {
    //makeBlob();
    // makeBox();
   
- 
-  
-  
    if (mode == INTRO) {
     intro();
   } else if (mode == GAME) {

@@ -6,8 +6,10 @@ void game() {
 
 void drawing() {
   
-   if (gBall.getX() < 0)                               {  gBall.setVelocity(0, 0);  gBall.setPosition(98, 250);}
-  if (gBall.getX() > width || gBall.getY() > height)  {  gBall.setVelocity(0, 0);  gBall.setPosition(98, 250);} 
+  if (gBall.getX() < 0 || gBall.getX() > width || gBall.getY() > height){
+    world.remove(gBall);
+    makeGball();
+  } 
   world.step();                                                                                                                         //get box2D to calculate all the forces and new positions
   world.draw();                                                                                                                           //ask box2D to convert this world to processing screen coordinates and draw
 
@@ -31,9 +33,17 @@ void drawing() {
   } else {
     gBall.setFillColor(grey); 
   }
-  
-  
-   pushMatrix(); 
+ 
+ if (gBall.getX() > 800 && gBall.getY() > 530) {
+    if (gBall.getX() < 830 && gBall.getY() < 560) {
+      if( gBall.getVelocityX() == 0 || gBall.getVelocityY() == 0) {
+      mode = GAMEOVER; 
+      gBall.setPosition(98, 240);
+      }
+    }
+  }
+     
+  pushMatrix(); 
   fill(0); 
   strokeWeight(1); 
   rect(815, 450, 2, 110);
